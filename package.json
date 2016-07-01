@@ -1,0 +1,34 @@
+{
+  "name": "generator-net",
+  "version": "0.0.1",
+  "description": "Yeoman generator for .NET Core projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liushuping/generator-net.git"
+  },
+  "keywords": [
+    "dotnet",
+    "core",
+    "net",
+    ".net",
+    "aspnet",
+    "core",
+    "asp.net",
+    "core",
+    "asp.net",
+    "yeoman-generator",
+    "generator-net",
+    ".NET",
+    "Core"
+  ],
+  "author": "Shuping LIU",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liushuping/generator-net/issues"
+  },
+  "homepage": "https://github.com/liushuping/generator-net#readme"
+}
