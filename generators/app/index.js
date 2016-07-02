@@ -7,14 +7,14 @@ module.exports = yeoman.Base.extend({
   prompting: function () {
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the grand ' + chalk.red('generator-net') + ' generator!'
+      'Welcome to the .NET Core generator!'
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someAnswer',
-      message: 'Would you like to enable this option?',
-      default: true
+      type: 'string',
+      name: 'projectName',
+      message: 'Console application name',
+      default: "ConsoleApplication1"
     }];
 
     return this.prompt(prompts).then(function (props) {
@@ -24,13 +24,21 @@ module.exports = yeoman.Base.extend({
   },
 
   writing: function () {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+    this.fs.copyTpl(
+      this.templatePath('Program.cs'),
+      this.destinationPath('Program.cs'),
+      {
+        namespace: this.props.projectName  
+      }
     );
+
+    this.fs.copy(
+      this.templatePath('project.json'),
+      this.destinationPath('project.json')
+    )
   },
 
   install: function () {
-    this.installDependencies();
+    //this.installDependencies();
   }
 });

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "chalk": "registry:npm/chalk#1.0.0+20160211003958"
+  },
+  "globalDependencies": {
+    "handlebars": "registry:dt/handlebars#3.0.3+20160317120654",
+    "yeoman-generator": "registry:dt/yeoman-generator#0.0.0+20160623193335",
+    "yosay": "registry:dt/yosay#0.0.0+20160316155526"
+  }
+}

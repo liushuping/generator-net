@@ -37,8 +37,9 @@
     "url": "https://github.com/liushuping/generator-net/issues"
   },
   "dependencies": {
-    "yeoman-generator": "^0.23.0",
     "chalk": "^1.0.0",
+    "handlebars": "^4.0.5",
+    "yeoman-generator": "^0.23.0",
     "yosay": "^1.0.0"
   },
   "devDependencies": {
