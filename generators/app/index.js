@@ -71,6 +71,9 @@ module.exports = yeoman.Base.extend({
       case 'webapp': 
         this._writeWebApp();
         break;
+      case 'unittest':
+        this._writeUnitTestApp();
+        break;
       default:
         break;
     }
@@ -115,6 +118,26 @@ module.exports = yeoman.Base.extend({
 
     this.fs.copy(
       this.templatePath('webapp/project.json'),
+      this.destinationPath('project.json')
+    )
+  },
+
+  _writeUnitTestApp: function() {
+    this.fs.copyTpl(
+      this.templatePath('unittest/Class1Test.cs'),
+      this.destinationPath('Class1Test.cs'),
+      {
+        namespace: this.props.projectName  
+      }
+    );
+
+    this.fs.copy(
+      this.templatePath('unittest/xunit.runner.json'),
+      this.destinationPath('xunit.runner.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('unittest/project.json'),
       this.destinationPath('project.json')
     )
   }
