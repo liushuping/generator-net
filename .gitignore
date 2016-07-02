@@ -1,11 +1,2 @@
-.git
-CVS
-.svn
-.hg
-.lock-wscript
-.wafpickle-N
-*.swp
-.DS_Store
-._*
-npm-debug.log
-node_modules/
+node_modules
+coverage
