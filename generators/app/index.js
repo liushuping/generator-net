@@ -5,20 +5,56 @@ var yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
   prompting: function () {
-    // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the .NET Core generator!'
     ));
 
     var prompts = [{
-      type: 'string',
-      name: 'projectName',
-      message: 'Console application name',
-      default: "ConsoleApplication1"
+      type: 'list',
+      name: 'projectType',
+      message: 'Select a project type',
+      choices: [{
+        name: 'Console Application (.NET Core)',
+        value: 'consoleapp'
+      }, {
+        name: 'Web Application (ASP.NET Core)',
+        value: 'webapp'
+      }, {
+        name: 'Unit Test Project (xUnit.net)',
+        value: 'unittest'
+      }]
     }];
 
     return this.prompt(prompts).then(function (props) {
-      // To access props later use this.props.someAnswer;
+      this.props = props;
+    }.bind(this));
+  },
+
+  askForName: function() {
+    var appName;
+    switch(this.projectType) {
+      case 'consoleapp': 
+        appName = 'Console Application';
+        break;
+      case 'webapp':
+        appName = 'Web Application';
+        break;
+      case 'unittest':
+        appName = 'Unit Test';
+        break;
+      default:
+        appName = 'Console Application';
+        break;
+    }
+
+    var prompts = [{
+      type: 'string',
+      name: 'projectName',
+      message: `What's the name of your ${appName}?`,
+      default: 'ConsoleApplication1'
+    }];
+
+    return this.prompt(prompts).then(function (props) {
       this.props = props;
     }.bind(this));
   },
