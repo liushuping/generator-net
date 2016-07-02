@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "chalk": "registry:npm/chalk#1.0.0+20160211003958"
+    "chalk": "registry:npm/chalk#1.0.0+20160211003958",
+    "lodash": "registry:npm/lodash#4.0.0+20160701205107"
   },
   "globalDependencies": {
     "handlebars": "registry:dt/handlebars#3.0.3+20160317120654",

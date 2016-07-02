@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var _ = require('lodash');
 
 module.exports = yeoman.Base.extend({
   prompting: function () {
@@ -31,37 +32,58 @@ module.exports = yeoman.Base.extend({
   },
 
   askForName: function() {
-    var appName;
-    switch(this.projectType) {
+    var appType;
+    switch(this.props.projectType) {
       case 'consoleapp': 
-        appName = 'Console Application';
+        appType = 'Console Application';
         break;
       case 'webapp':
-        appName = 'Web Application';
+        appType = 'Web Application';
         break;
       case 'unittest':
-        appName = 'Unit Test';
+        appType = 'Unit Test';
         break;
       default:
-        appName = 'Console Application';
+        appType = 'Console Application';
         break;
     }
+
+    var appName = appType.replace(' ', '') + '1';
 
     var prompts = [{
       type: 'string',
       name: 'projectName',
-      message: `What's the name of your ${appName}?`,
-      default: 'ConsoleApplication1'
+      message: `What's the name of your ${appType}?`,
+      default: appName
     }];
 
     return this.prompt(prompts).then(function (props) {
-      this.props = props;
+      _.extend(this.props, props);
     }.bind(this));
   },
 
   writing: function () {
+    console.log(this.props.projectType);
+    switch(this.props.projectType) {
+      case 'consoleapp':
+        this._writeConsoleApp();
+        break;
+      case 'webapp': 
+        this._writeWebApp();
+        break;
+      default:
+        break;
+    }
+    
+  },
+
+  install: function () {
+    //this.installDependencies();
+  },
+
+  _writeConsoleApp: function() {
     this.fs.copyTpl(
-      this.templatePath('Program.cs'),
+      this.templatePath('consoleapp/Program.cs'),
       this.destinationPath('Program.cs'),
       {
         namespace: this.props.projectName  
@@ -69,12 +91,31 @@ module.exports = yeoman.Base.extend({
     );
 
     this.fs.copy(
-      this.templatePath('project.json'),
+      this.templatePath('consoleapp/project.json'),
       this.destinationPath('project.json')
     )
   },
 
-  install: function () {
-    //this.installDependencies();
+  _writeWebApp: function() {
+    this.fs.copyTpl(
+      this.templatePath('webapp/Program.cs'),
+      this.destinationPath('Program.cs'),
+      {
+        namespace: this.props.projectName  
+      }
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('webapp/Startup.cs'),
+      this.destinationPath('Startup.cs'),
+      {
+        namespace: this.props.projectName
+      }
+    );
+
+    this.fs.copy(
+      this.templatePath('webapp/project.json'),
+      this.destinationPath('project.json')
+    )
   }
 });
