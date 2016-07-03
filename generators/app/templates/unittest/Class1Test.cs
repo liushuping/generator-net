@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace <%= namespace %>
@@ -15,9 +12,22 @@ namespace <%= namespace %>
         }
 
         [Fact]
-        public void SomeOtherTest() 
+        public void SomeOtherTest()
         {
-            Assert.Equal("abc", "a"+"b"+"c");
+            Assert.Equal("abc", "a" + "b" + "c");
+        }
+
+        [Theory]
+        [InlineData(1, 2, 3)]
+        [InlineDataAttribute(0, 1, 1)]
+        public void AddTest(int a, int b, int s)
+        {
+
+        }
+
+        public int Sum(int a, int b)
+        {
+            return a + b;
         }
     }
 }
