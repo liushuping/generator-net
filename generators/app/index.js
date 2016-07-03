@@ -1,6 +1,5 @@
 'use strict';
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
 var yosay = require('yosay');
 var _ = require('lodash');
 
@@ -31,21 +30,21 @@ module.exports = yeoman.Base.extend({
     }.bind(this));
   },
 
-  askForName: function() {
+  askForName: function () {
     var appType;
-    switch(this.props.projectType) {
-      case 'consoleapp': 
-        appType = 'Console Application';
-        break;
-      case 'webapp':
-        appType = 'Web Application';
-        break;
-      case 'unittest':
-        appType = 'Unit Test';
-        break;
-      default:
-        appType = 'Console Application';
-        break;
+    switch (this.props.projectType) {
+    case 'consoleapp':
+      appType = 'Console Application';
+      break;
+    case 'webapp':
+      appType = 'Web Application';
+      break;
+    case 'unittest':
+      appType = 'Unit Test';
+      break;
+    default:
+      appType = 'Console Application';
+      break;
     }
 
     var appName = appType.replace(' ', '') + '1';
@@ -53,7 +52,7 @@ module.exports = yeoman.Base.extend({
     var prompts = [{
       type: 'string',
       name: 'projectName',
-      message: `What's the name of your ${appType}?`,
+      message: 'What\'s the name of your ' + appType,
       default: appName
     }];
 
@@ -63,48 +62,47 @@ module.exports = yeoman.Base.extend({
   },
 
   writing: function () {
-    console.log(this.props.projectType);
-    switch(this.props.projectType) {
-      case 'consoleapp':
-        this._writeConsoleApp();
-        break;
-      case 'webapp': 
-        this._writeWebApp();
-        break;
-      case 'unittest':
-        this._writeUnitTestApp();
-        break;
-      default:
-        break;
+    switch (this.props.projectType) {
+    case 'consoleapp':
+      this._writeConsoleApp();
+      break;
+    case 'webapp':
+      this._writeWebApp();
+      break;
+    case 'unittest':
+      this._writeUnitTestApp();
+      break;
+    default:
+      break;
     }
-    
+
   },
 
   install: function () {
     //this.installDependencies();
   },
 
-  _writeConsoleApp: function() {
+  _writeConsoleApp: function () {
     this.fs.copyTpl(
       this.templatePath('consoleapp/Program.cs'),
       this.destinationPath('Program.cs'),
       {
-        namespace: this.props.projectName  
+        namespace: this.props.projectName
       }
     );
 
     this.fs.copy(
       this.templatePath('consoleapp/project.json'),
       this.destinationPath('project.json')
-    )
+    );
   },
 
-  _writeWebApp: function() {
+  _writeWebApp: function () {
     this.fs.copyTpl(
       this.templatePath('webapp/Program.cs'),
       this.destinationPath('Program.cs'),
       {
-        namespace: this.props.projectName  
+        namespace: this.props.projectName
       }
     );
 
@@ -119,15 +117,15 @@ module.exports = yeoman.Base.extend({
     this.fs.copy(
       this.templatePath('webapp/project.json'),
       this.destinationPath('project.json')
-    )
+    );
   },
 
-  _writeUnitTestApp: function() {
+  _writeUnitTestApp: function () {
     this.fs.copyTpl(
       this.templatePath('unittest/Class1Test.cs'),
       this.destinationPath('Class1Test.cs'),
       {
-        namespace: this.props.projectName  
+        namespace: this.props.projectName
       }
     );
 
@@ -139,6 +137,6 @@ module.exports = yeoman.Base.extend({
     this.fs.copy(
       this.templatePath('unittest/project.json'),
       this.destinationPath('project.json')
-    )
+    );
   }
 });
