@@ -1,6 +1,6 @@
 {
   "name": "generator-net",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yeoman generator for .NET Core projects",
   "homepage": "https://github.com/liushuping/generator-net#readme",
   "author": "Shuping LIU",
