@@ -1,3 +1,5 @@
+# Notice: As the .NET Core (https://github.com/dotnet/cli) has the roadmap to implement all command line tools for generating most types of projects, this project is put on hold.
+
 # generator-net
 Yeoman generator for .NET Core projects
 
